@@ -1,0 +1,77 @@
+CREATE TABLE contact_messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE food_donations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  prepared_time VARCHAR(50),
+  quantity VARCHAR(50),
+  safe_hours VARCHAR(50),
+  pickup_address TEXT,
+  contact VARCHAR(20),
+  image VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE cloth_donations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  purchase_time VARCHAR(50),
+  quantity INT,
+  cloth_type VARCHAR(50),
+  pickup_address TEXT,
+  contact VARCHAR(20),
+  image VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE DATABASE adhaar_db;
+USE adhaar_db;
+CREATE TABLE volunteers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    interest VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE volunteer_details (
+  user_id INT PRIMARY KEY,
+  availability VARCHAR(100),
+  skills VARCHAR(255),
+  preferred_area VARCHAR(100),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+CREATE TABLE donors (
+  user_id INT PRIMARY KEY,
+  donation_type VARCHAR(100),
+  frequency ENUM('daily','weekly','monthly'),
+  pickup_address TEXT,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+CREATE TABLE donations (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  donation_date DATE,
+  status VARCHAR(50),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+<!--------admin------->
+
+SELECT 
+  r.name,
+  r.email,
+  r.role,
+  COUNT(DISTINCT f.id) AS food_count,
+  COUNT(DISTINCT c.id) AS cloth_count,
+  (COUNT(DISTINCT f.id) + COUNT(DISTINCT c.id)) AS total_donations
+FROM register r
+LEFT JOIN food_donations f ON r.email = f.donor_email
+LEFT JOIN cloth_donations c ON r.email = c.donor_email
+WHERE r.verified = 1
+GROUP BY r.email
+ORDER BY total_donations DESC;

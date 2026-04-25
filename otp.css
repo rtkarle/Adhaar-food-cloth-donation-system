@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #e6f4ef, #f8fafc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-box {
+  width: 380px;
+  background: #ffffff;
+  padding: 2.2rem;
+  border-radius: 18px;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 1.6rem;
+}
+
+.auth-box input,
+.auth-box select,
+.auth-box textarea {
+  width: 100%;
+  padding: 0.85rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+.auth-box input[name="otp"] {
+  text-align: center;
+  letter-spacing: 4px;
+  font-size: 1.2rem;
+}
+
+.auth-box textarea {
+  resize: none;
+  min-height: 90px;
+}
+
+.auth-box input:focus,
+.auth-box select:focus,
+.auth-box textarea:focus {
+  outline: none;
+  border-color: #2f855a;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 0.9rem;
+  background: #2f855a;
+  color: white;
+  border: none;
+  border-radius: 22px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.auth-box button:hover {
+  background: #256d4a;
+}
+
+.error {
+  color: #dc2626;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.success {
+  color: #16a34a;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

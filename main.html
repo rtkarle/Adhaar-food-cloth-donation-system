@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aadhar — Donate | Volunteer | Impact (merged, fixed)</title>
+  <meta name="description" content="Aadhar — Donate clothes, food & essentials. Join hands to create sustainable impact." />
+
+  <!-- Main site CSS (kept from your original file; minor cleanup) -->
+  <style>
+    :root{--accent:#e74c3c;--accent-2:#ff7f50;--muted:#6b6b6b;--maxw:1100px}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:#222}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+    /* NAV */
+    header{background:#fff; position:sticky; top:0; z-index:80; border-bottom:1px solid #eee}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:72px}
+    .brand{display:flex; gap:12px; align-items:center}
+    .brand img{height:44px}
+    nav ul{list-style:none; display:flex; gap:18px; margin:0; padding:0; align-items:center}
+    nav li a{padding:8px 10px; border-radius:6px}
+    nav li a:hover{background:#f7f7f7}
+    .btn{background:var(--accent); color:#fff; padding:10px 14px; border-radius:8px; font-weight:600; border:none; cursor:pointer}
+
+    /* HERO */
+    .hero{display:flex; gap:40px; align-items:center; padding:60px 0}
+    .hero-left{flex:1}
+    .kicker{display:inline-block; background:#f7eeed; color:var(--accent); padding:6px 10px; border-radius:999px; font-weight:700}
+    h1{font-size:34px; margin:18px 0 12px; line-height:1.05}
+    p.lead{color:var(--muted); margin:0 0 18px}
+    .cta-row{display:flex; gap:12px; align-items:center}
+
+    .hero-right{flex:1; text-align:right}
+    .hero-card{display:inline-block; background:linear-gradient(180deg,#fff,#fff); padding:18px; border-radius:14px; box-shadow:0 6px 30px rgba(20,20,20,0.06); max-width:380px}
+    .impact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px}
+    .impact{background:#fafafa; padding:10px; border-radius:10px}
+    .impact b{display:block; font-size:18px}
+
+    /* SECTIONS */
+    section{padding:56px 0}
+    h2.section-title{font-size:22px; color: #070707; margin:0 0 14px}
+    h3{color: #f4f4f4;}
+    .card-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px}
+    .card{background:#ef6565; padding:16px; border-radius:12px; box-shadow:0 6px 20px rgba(30,30,30,0.04)}
+
+    /* Give & Volunteer forms */
+    .form-row{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    input,textarea,select{width:100%; padding:10px; border:1px solid #984141; border-radius:8px; font-size:14px}
+    label{font-size:13px; color:var(--muted); display:block; margin-bottom:6px}
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px}
+    .gallery img{width:100%; height:160px; object-fit:cover; border-radius:8px}
+
+    /* Footer */
+    footer{background:#111; color:#fff; padding:30px 0}
+    footer a{color:#fff}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hero{flex-direction:column; text-align:left}
+      .hero-right{text-align:left}
+      .form-row{grid-template-columns:1fr}
+      nav ul{display:none}
+      .mobile-nav-toggle{display:inline-block}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted);}
+    .text-center{text-align:center}
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:#fff}
+
+    #logo{
+        height: 80px;
+        width: 80px;
+        border-radius: 30px;
+    }
+    body{
+        background-image: url("fw.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    /* Portal overlay (iframe container) */
+    #portalOverlay{display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:9999; align-items:center; justify-content:center}
+    #portalBox{
+  width:100%;
+  height:100%;
+  max-width:none;
+  border-radius:0;
+  box-shadow:none;
+}
+
+    #portalClose{position:absolute; right:12px; top:12px; z-index:10; padding:8px 10px; border-radius:8px; border:none; cursor:pointer}
+    #portalIframe{width:100%; height:100%; border:0; display:block}
+
+    /* small toast */
+    #miniToast{position:fixed; right:18px; top:18px; background:#222; color:#fff; padding:8px 10px; border-radius:8px; display:none; z-index:10000}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <!-- Replace the placeholder logo with your logo -->
+      <img src="logo.jpg" alt="Aadhar logo" id="logo"/>
+      <div>
+        <div style="font-weight:700;">Aadhar</div>
+        <div style="font-size:12px;color:var(--muted)">Food management • Sustainability • Community</div>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#initiatives">Our Work</a></li>
+        <li><a href="#stories">Stories</a></li>
+        <li><a href="#get-involved">Get Involved</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div style="display:flex;gap:10px;align-items:center">
+      <p id="error" style="color:red"></p>
+    </div>
+
+    <!-- LOGIN opens the in-page portal (iframe) -->
+    <button class="btn" id="openPortalBtn">Login</button>
+    <button class="pill" id="mobileToggle" style="display:none">☰</button>
+  </div>
+</header>
+
+<main class="container" id="home">
+  <!-- (Your original site content unchanged — hero, about, initiatives, etc.) -->
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <span class="kicker">Make a difference</span>
+      <h1>Turn surplus into dignity. <br/> Help communities rebuild lives.</h1>
+      <p class="lead">Aadhar connects donors and volunteers with people in need — clothing and food. Join our campaigns, donate, or volunteer.</p>
+
+      <div class="cta-row">
+        <a href="#get-involved" style="padding:10px 12px; background:#f4f4f4; border-radius:8px">Volunteer</a>
+      </div>
+
+      <div style="margin-top:18px">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="font-size:28px;font-weight:800">❤ 34</div>
+          <div class="muted">Items distributed since July 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="muted">Ongoing Campaign</div>
+            <b style="font-size:16px">Cloth for Work — Winter Drive</b>
+            <div class="muted" style="font-size:13px;margin-top:6px">Collecting warm clothes for rural communities and distribution partners.</div>
+          </div>
+          <img src="https://th.bing.com/th/id/OIP.VkZ1gfAylSqc8e1DjwlhyQHaFC?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="campaign" style="border-radius:8px;height:84px;object-fit:cover"/>
+        </div>
+
+        <div class="impact-grid">
+          <div class="impact"><b>07</b><small class="muted">Households helped</small></div>
+          <div class="impact"><b>05</b><small class="muted">Volunteers</small></div>
+          <div class="impact"><b>02</b><small class="muted">Campaigns</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start">
+        <div>
+          <p class="muted">Aadhar was founded in 2025 with a mission to treat food and essentials as dignified resources, not charity. We work closely with grassroots partners to ensure needs are met and communities are empowered.</p>
+          <ul style="margin-top:12px;color:var(--muted)">
+            <li>Community-driven distribution</li>
+            <li>Disaster relief & rehabilitation</li>
+            <li>Menstrual health & dignity programs</li>
+            <li>Education supply drives</li>
+          </ul>
+        </div>
+        <div>
+          <div class="card" style="text-align:center">
+            <img src="https://th.bing.com/th/id/OIP.2xBG3I4I52zpg-dNeXrWlgHaEE?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="impact" style="width:100%;border-radius:8px;margin-bottom:10px"/>
+            <div style="font-weight:700">How we work</div>
+            <div class="muted" style="font-size:13px;margin-top:6px">We collect, sort and channel resources through local partners, ensuring accountability and long-term benefits.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INITIATIVES -->
+  <section id="initiatives">
+    <div class="container">
+      <h2 class="section-title">Our Work</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Clothing</h3>
+          <p class="muted">We aim to collect clothing which are in condition to wear and use. We aim to distribute it to people in need. It will solve-1.Clothing waste 2.Poverty.</p>
+        </article>
+        <article class="card">
+          <h3>Food</h3>
+          <p class="muted">We aim to collect extra food from donors and distribute to people in need. It will solve two problems-1.Food wastage 2.Hunger of people</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- (rest unchanged: stories, get-involved, contact, footer) -->
+  <!-- STORIES -->
+  <section id="stories">
+    <div class="container">
+      <h2 class="section-title">Stories & Impact</h2>
+      <div class="gallery">
+        <img src="p4.jpg" alt="story 1"/>
+        <img src="p1.jpg" alt="story 2" class="ph1"/>
+        <img src="p2.jpg" alt="story 3"/>
+        <img src="p3.jpg" alt="story 4"/>
+      </div>
+      <div style="margin-top:14px;text-align:center">
+        <a href="#" class="btn">Read more stories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET INVOLVED -->
+  <section id="get-involved">
+    <div class="container">
+      <h2 class="section-title">Get Involved</h2>
+      <div style="display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start">
+
+        <div>
+          <h3>Volunteer with us</h3>
+          <p class="muted">Join our drives, help in sorting centers, participate in awareness campaigns or become a local champion.</p>
+
+          <form id="volunteerForm">
+            <div class="form-row">
+              <div>
+                <label for="vname">Full name</label>
+                <input id="vname" name="name" placeholder="Your name" required />
+              </div>
+              <div>
+                <label for="vphone">Phone</label>
+                <input id="vphone" name="phone" placeholder="Mobile number" required />
+              </div>
+            </div>
+            <div style="margin-top:10px">
+              <label for="vemail">Email</label>
+              <input id="vemail" name="email" placeholder="you@example.com" required />
+            </div>
+            <div style="margin-top:10px">
+              <label for="vmessage">How would you like to help?</label>
+              <textarea id="vmessage" name="message" rows="3" placeholder="e.g. sorting, logistics, teaching"></textarea>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:10px">
+              <!-- Sign up button -->
+              <button type="submit" class="btn">Sign Up</button>
+              <!-- Opens the login portal (keeps behavior consistent) -->
+              <button type="button" onclick="document.getElementById('openPortalBtn').click()" style="background:#f4f4f4;border-radius:8px;padding:10px">Login</button>
+            </div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3>Donate clothing or items</h3>
+            <p class="muted">We accept gently used clothing, school supplies and household items. Check the guidelines before donating.</p>
+            <ul class="muted">
+              <li>Clean, usable clothing</li>
+              <li>School kits & books</li>
+              <li>Blankets & hygiene kits</li>
+            </ul>
+            <div style="margin-top:10px;text-align:center">
+              <a class="btn" href="#contact">Request pickup</a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact & Pickup</h2>
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start">
+        <form id="contactForm">
+          <div class="form-row">
+            <div>
+              <label for="cname">Name</label>
+              <input id="cname" name="name" required />
+            </div>
+            <div>
+              <label for="cphone">Phone</label>
+              <input id="cphone" name="phone" required />
+            </div>
+          </div>
+          <div style="margin-top:10px">
+            <label for="cemail">Email</label>
+            <input id="cemail" name="email" />
+          </div>
+          <div style="margin-top:10px">
+            <label for="cmsg">Message / Pickup details</label>
+            <textarea id="cmsg" name="message" rows="4" placeholder="Address, best pickup times, items list"></textarea>
+          </div>
+          <div style="margin-top:10px">
+            <button class="btn" type="submit">Send Request</button>
+          </div>
+        </form>
+
+        <aside>
+          <div class="card">
+            <h3>Office</h3>
+            <div class="muted">Replace with your full address</div>
+            <div style="margin-top:8px">Phone: <a href="tel:+911234567890">+91 12345 67890</a></div>
+            <div style="margin-top:8px">Email: <a href="mailto:hello@yourorg.org">hello@yourorg.org</a></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+    <div>
+      <div style="font-weight:700"></div>
+      <div class="muted" style="font-size:13px">Registered NGO | PAN: YOUR_PAN | Reg no: 0000</div>
+    </div>
+    <div class="muted">© <span id="year"></span> Aadhar. All rights reserved.</div>
+    <div style="display:flex;gap:8px">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<div id="miniToast"></div>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobileNav" style="display:none">
+  <div class="box">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-weight:700">MENU</div>
+      <button onclick="toggleMobileNav()">✕</button>
+    </div>
+    <nav style="margin-top:20px">
+      <ul style="list-style:none;padding:0">
+        <li style="padding:8px 0"><a href="#home" onclick="toggleMobileNav()">Home</a></li>
+        <li style="padding:8px 0"><a href="#about" onclick="toggleMobileNav()">About</a></li>
+        <li style="padding:8px 0"><a href="#initiatives" onclick="toggleMobileNav()">Our Work</a></li>
+        <li style="padding:8px 0"><a href="#stories" onclick="toggleMobileNav()">Stories</a></li>
+        <li style="padding:8px 0"><a href="#get-involved" onclick="toggleMobileNav()">Get Involved</a></li>
+        <li style="padding:8px 0"><a href="#contact" onclick="toggleMobileNav()">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Portal overlay (iframe loads the template content via srcdoc) -->
+<div id="portalOverlay">
+  <div id="portalBox">
+    <button id="portalClose">✕</button>
+    <iframe id="portalIframe" title="Aadhar Portal (login/dashboard)"></iframe>
+  </div>
+</div>
+
+<!-- IMPORTANT: embed the dash HTML inside a <template> so we can safely put it into iframe.srcdoc -->
+<template id="dashTemplate">
+  <!-- dashb00.html content (kept self-contained) -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aadhaar-NGO Portal • Sample Frontend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg1:#0e0f1a; --bg2:#1a1f2e; --brand:#7dd3fc; --brand2:#a78bfa; --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444;
+        --glass: rgba(255,255,255,.06); --glass-strong: rgba(255,255,255,.12); --text:#e6e8ee; --muted:#b7bdd1;
+        --shadow: 0 20px 50px rgba(0,0,0,.45);
+      }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{margin:0; font-family:Inter,system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color:var(--text); background: radial-gradient(1200px 800px at 15% 10%, #1f2540 0%, transparent 60%), radial-gradient(1200px 800px at 85% 80%, #1a2a3f 0%, transparent 60%), linear-gradient(160deg, var(--bg1), var(--bg2)); overflow-x:hidden}
+
+      /* minimal styles to make the portal readable inside iframe */
+      .wrap{position:relative; z-index:2; min-height:100%; display:flex; align-items:center; justify-content:center; padding:48px 20px}
+      .card{background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.12); border-radius:24px; box-shadow: var(--shadow); backdrop-filter: blur(12px)}
+      .login{width:100%; max-width:980px; display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; padding:28px}
+      .brand-pane{padding:36px; border-radius:20px; background: radial-gradient(120% 120% at 20% 20%, rgba(125,211,252,.2), transparent 60%), radial-gradient(120% 120% at 80% 80%, rgba(167,139,250,.2), transparent 60%), var(--glass)}
+      .brand-logo{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px; font-size:20px}
+      .login-form{padding:36px}
+      label{display:block; font-size:13px; color:var(--muted); margin:14px 0 8px}
+      .input{width:100%; padding:14px 16px; border-radius:14px; outline:none; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color:var(--text); transition: .2s}
+      .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.16); background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.22)); color:white; cursor:pointer; font-weight:600; transition:.2s; box-shadow: 0 10px 24px rgba(0,0,0,.3)}
+      .muted{color:var(--muted); font-size:12px}
+      .err{color:#fecaca; font-size:12px; min-height:16px}
+      .dash{display:none; max-width:1200px; width:100%; padding:20px}
+      .dash-grid{display:grid; grid-template-columns: 260px 1fr; gap:18px}
+      .sidebar{padding:18px; border-radius:20px}
+      .avatar{width:52px; height:52px; border-radius:16px; background:linear-gradient(135deg, #60a5fa, #a78bfa); display:grid; place-items:center; font-weight:800}
+      .side-item{padding:12px 14px; border-radius:12px; cursor:pointer; display:flex; align-items:center; gap:10px; color:var(--muted); border:1px solid transparent}
+      .side-item.active, .side-item:hover{color:white; background: rgba(125,211,252,.12); border-color: rgba(125,211,252,.25)}
+      .main{display:grid; grid-template-rows:auto 1fr; gap:14px}
+      .hero{padding:18px; border-radius:20px; display:flex; align-items:center; justify-content:space-between; background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(167,139,250,.16))}
+      .table{width:100%; border-collapse:separate; border-spacing:0 10px}
+      .table td{background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); padding:12px 14px}
+      .toast{position:fixed; right:18px; bottom:18px; padding:12px 14px; border-radius:12px; background: rgba(34,197,94,.16); border:1px solid rgba(34,197,94,.35); box-shadow:var(--shadow); z-index:5; display:none}
+    </style>
+  </head>
+  <body class="grain">
+    <div class="wrap">
+      <!-- LOGIN VIEW -->
+      <section id="login" class="login card pop" aria-label="Login form">
+        <div class="brand-pane">
+          <div class="brand-logo"><span style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#7dd3fc,#a78bfa);display:inline-block;margin-right:8px"></span> Aadhaar-NGO Portal</div>
+          <h1>Welcome back 👋</h1>
+          <p>Log in to your private dashboard to view your donations, explore current needs, and make an impact.</p>
+          <div style="margin-top:18px;">
+            <div style="padding:10px;border:1px dashed rgba(255,255,255,.18);border-radius:10px;color:#dbeafe">Demo: user1→1234 … user10→1243</div>
+          </div>
+        </div>
+        <form class="login-form" onsubmit="return false;">
+          <h2 style="margin:0 0 8px">Sign in</h2>
+          <div class="muted">Demo credentials (sample): user1 … user10 • password varies per user (see note below)</div>
+          <label for="username">Username</label>
+          <input class="input" id="username" placeholder="e.g., user1" autocomplete="username" />
+          <label for="password">Password</label>
+          <input class="input" id="password" type="password" placeholder="e.g., 1234" autocomplete="current-password" />
+          <div id="loginErr" class="err"></div>
+          <button id="loginBtn" class="btn" type="button">Log in →</button>
+          <p class="muted" style="margin-top:10px">Password mapping for this sample: user1→1234, user2→1235, …, user10→1243.</p>
+        </form>
+      </section>
+
+      <!-- DASHBOARD VIEW -->
+      <section id="dash" class="dash fade-in">
+        <div class="dash-grid">
+          <aside class="sidebar card">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+              <div id="avatarSide" class="avatar" aria-hidden="true"></div>
+              <div>
+                <div id="nameSide" style="font-weight:700">User</div>
+                <div id="userSide" class="muted" style="font-size:12px">@user</div>
+              </div>
+            </div>
+            <div id="navHome" class="side-item active" onclick="showSection('home')">🏠 Home</div>
+            <div id="navHistory" class="side-item" onclick="showSection('history')">📜 Donation History</div>
+            <div id="navDonate" class="side-item" onclick="showSection('donate')">🎁 Make a Donation</div>
+            <div class="side-item logout" onclick="logout()">🚪 Logout</div>
+          </aside>
+
+          <main class="main">
+            <div class="hero card">
+              <div>
+                <h2 id="greet">Hello!</h2>
+                <div class="muted">Here’s your impact overview and current needs.</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+                <div class="stat card"><div class="kpi" id="kMeals">0</div><div class="k-caption">Total Meals Donated</div></div>
+                <div class="stat card"><div class="kpi" id="kClothes">0</div><div class="k-caption">Clothing Items Donated</div></div>
+                <div class="stat card"><div class="kpi" id="kDonations">0</div><div class="k-caption">Total Donations</div></div>
+              </div>
+            </div>
+
+            <section id="sec-home" class="card">
+              <div style="padding:16px">
+                <h3 style="margin:0 0 8px">Your profile</h3>
+                <div style="display:flex;align-items:center;gap:14px">
+                  <div id="avatarMain" class="avatar" style="width:64px;height:64px;border-radius:20px"></div>
+                  <div>
+                    <div id="nameMain" style="font-weight:800;font-size:20px">User Name</div>
+                    <div id="userMain" class="muted">@user</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="sec-history" class="card" hidden>
+              <div style="padding:16px">
+                <h3 style="margin:0 0 8px">Donation History</h3>
+                <table class="table" id="historyTable">
+                  <thead>
+                    <tr><th>Date</th><th>Type</th><th>Quantity</th><th>Note</th></tr>
+                  </thead>
+                  <tbody id="historyBody"></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section id="sec-donate" class="cards" hidden>
+              <div class="card">
+                <div style="padding:16px">
+                  <h3 style="margin:0">🍛 Food Donation</h3>
+                  <p class="muted" style="margin:6px 0 0">Provide meals to families and community kitchens.</p>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+                    <label>Meals<input id="foodQty" class="input" type="number" min="1" placeholder="e.g., 10" /></label>
+                    <label>Note (optional)<input id="foodNote" class="input" placeholder="Any message" /></label>
+                  </div>
+                 <button class="btn" onclick="location.href='admin_login.php'">Donate Food</button>
+
+                </div>
+              </div>
+              <div class="card">
+                <div style="padding:16px">
+                  <h3 style="margin:0">🧥 Clothing Donation</h3>
+                  <p class="muted" style="margin:6px 0 0">Support dignity with clean, usable clothing.</p>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+                    <label>Items<input id="clothQty" class="input" type="number" min="1" placeholder="e.g., 5" /></label>
+                    <label>Note (optional)<input id="clothNote" class="input" placeholder="Any message" /></label>
+                  </div>
+                  <button class="btn" onclick="donate('Clothing')">Donate Clothing</button>
+                </div>
+              </div>
+            </section>
+
+          </main>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast">Donation recorded. Thank you! 🎉</div>
+
+    <script>
+      // ---------- Demo Data & Utilities ----------
+      const USERS = Array.from({length:10}, (_,i)=>({
+        username: 'user' + (i+1),
+        password: String(1233 + (i+1)), // user1->1234 … user10->1243
+        name: 'User ' + (i+1),
+      }));
+
+      const $ = sel => document.querySelector(sel);
+      const nowISO = () => new Date().toISOString();
+      const fmtDate = iso => new Date(iso).toLocaleString();
+      const keyFor = (u) => 'ngo_demo_' + u + '_history_v1';
+
+      function seedHistory(username){
+        const key = keyFor(username);
+        if(localStorage.getItem(key)) return;
+        const sample = [
+          {date: nowISO(), type: 'Food', qty: 5, note: 'Welcome pack'},
+          {date: nowISO(), type: 'Clothing', qty: 2, note: 'Winter wear'}
+        ];
+        localStorage.setItem(key, JSON.stringify(sample));
+      }
+
+      function getHistory(username){
+        const raw = localStorage.getItem(keyFor(username));
+        return raw? JSON.parse(raw): [];
+      }
+      function setHistory(username, arr){
+        localStorage.setItem(keyFor(username), JSON.stringify(arr));
+      }
+
+      // Avatar: gradient initials
+      function avatarCanvas(initials){
+        const size = 128; const c = document.createElement('canvas');
+        c.width=size; c.height=size; const ctx=c.getContext('2d');
+        const g = ctx.createLinearGradient(0,0,size,size);
+        g.addColorStop(0,'#60a5fa'); g.addColorStop(1,'#a78bfa');
+        ctx.fillStyle=g; ctx.fillRect(0,0,size,size);
+        ctx.fillStyle='rgba(255,255,255,.16)'; ctx.fillRect(0,0,size,size);
+        ctx.fillStyle='#fff'; ctx.font='700 54px Inter, system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillText(initials, size/2, size/2);
+        return c.toDataURL('image/png');
+      }
+
+      function initials(name){
+        return name.split(' ').map(x=>x[0]).slice(0,2).join('').toUpperCase();
+      }
+
+      let currentUser = null;
+
+      // ---------- Login Logic ----------
+      $('#loginBtn').addEventListener('click', ()=>{
+        const u = $('#username').value.trim();
+        const p = $('#password').value.trim();
+        const found = USERS.find(x=>x.username===u && x.password===p);
+        if(!found){
+          $('#loginErr').textContent = 'Invalid credentials. Try user1…user10 with the matching password (user1→1234, …, user10→1243).';
+          return;
+        }
+        currentUser = found;
+        seedHistory(currentUser.username);
+        mountDashboard();
+
+        // Inform parent that login succeeded and ask it to close the portal
+        try {
+          window.parent.postMessage({type:'login-success', username: currentUser.username, name: currentUser.name}, '*');
+          
+        } catch(e){
+          // ignore if cross-origin
+        }
+
+        window.history.pushState({view:'dash'}, '', '#dashboard');
+      });
+
+      window.addEventListener('popstate', (e)=>{
+        if(e.state && e.state.view==='dash') showDash(); else showLogin();
+      });
+
+      function showLogin(){
+        $('#dash').style.display='none';
+        $('#login').style.display='grid';
+      }
+      function showDash(){
+        $('#login').style.display='none';
+        $('#dash').style.display='block';
+      }
+
+      // ---------- Dashboard Mount ----------
+      function mountDashboard(){
+        // Switch view
+        showDash();
+        // Fill profile
+        const av = avatarCanvas(initials(currentUser.name));
+        document.getElementById('avatarSide').style.backgroundImage = 'url(' + av + ')';
+        document.getElementById('avatarSide').style.backgroundSize = 'cover';
+        document.getElementById('avatarMain').style.backgroundImage = 'url(' + av + ')';
+        document.getElementById('avatarMain').style.backgroundSize = 'cover';
+
+        document.getElementById('nameSide').textContent = currentUser.name;
+        document.getElementById('userSide').textContent = '@' + currentUser.username;
+        document.getElementById('nameMain').textContent = currentUser.name;
+        document.getElementById('userMain').textContent = '@' + currentUser.username;
+        document.getElementById('greet').textContent = 'Hello, ' + currentUser.name;
+
+        // Load history & KPIs
+        renderHistory();
+        updateKPIs();
+
+        // Default section
+        showSection('home');
+      }
+
+      function updateKPIs(){
+        const h = getHistory(currentUser.username);
+        const meals = h.filter(x=>x.type==='Food').reduce((a,b)=>a+Number(b.qty||0),0);
+        const clothes = h.filter(x=>x.type==='Clothing').reduce((a,b)=>a+Number(b.qty||0),0);
+        document.getElementById('kMeals').textContent = meals;
+        document.getElementById('kClothes').textContent = clothes;
+        document.getElementById('kDonations').textContent = h.length;
+      }
+
+      function renderHistory(){
+        const body = document.getElementById('historyBody');
+        body.innerHTML = '';
+        const h = getHistory(currentUser.username).slice().reverse();
+        for(const row of h){
+          const tr = document.createElement('tr');
+          tr.innerHTML = ''
+            + '<td>' + fmtDate(row.date) + '</td>'
+            + '<td>' + (row.type || '') + '</td>'
+            + '<td>' + (row.qty || '') + '</td>'
+            + '<td>' + (row.note || '') + '</td>';
+          body.appendChild(tr);
+        }
+      }
+
+      function donate(kind){
+        const qty = kind==='Food' ? Number(document.getElementById('foodQty').value) : Number(document.getElementById('clothQty').value);
+        const note = kind==='Food' ? document.getElementById('foodNote').value.trim() : document.getElementById('clothNote').value.trim();
+        if(!qty || qty<=0){
+          toast('Please enter a valid quantity.');
+          return;
+        }
+        const h = getHistory(currentUser.username);
+        h.push({date: nowISO(), type: kind, qty, note});
+        setHistory(currentUser.username, h);
+        // Reset
+        if(kind==='Food'){ document.getElementById('foodQty').value=''; document.getElementById('foodNote').value=''; }
+        else { document.getElementById('clothQty').value=''; document.getElementById('clothNote').value=''; }
+        // Update UI
+        renderHistory();
+        updateKPIs();
+        toast('Donation recorded. Thank you! 🎉');
+      }
+
+      function toast(msg){
+        const t = document.getElementById('toast');
+        t.textContent = msg; t.style.display = 'block';
+        setTimeout(()=>{ t.style.display='none'; }, 1800);
+      }
+
+      function showSection(id){
+        const sections = ['home','history','donate'];
+        for(const s of sections){
+          const el = document.getElementById('sec-'+s);
+          if(!el) continue;
+          if(s===id){ el.hidden=false; } else { el.hidden=true; }
+        }
+        Array.from(document.querySelectorAll('.side-item')).forEach(x=>x.classList.remove('active'));
+        if(id==='home') document.getElementById('navHome').classList.add('active');
+        if(id==='history') document.getElementById('navHistory').classList.add('active');
+        if(id==='donate') document.getElementById('navDonate').classList.add('active');
+      }
+
+      function logout(){
+        currentUser = null;
+        showLogin();
+        window.history.pushState({view:'login'}, '', '#login');
+        document.getElementById('username').focus();
+
+        // inform parent (so it can update UI)
+        try { window.parent.postMessage({type:'logout'}, '*'); } catch(e){}
+      }
+
+      // Accessibility: enter to login
+      ['username','password'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('keyup', e=>{ if(e.key==='Enter') document.getElementById('loginBtn').click(); });
+      });
+    </script>
+  </body>
+  </html>
+</template>
+
+<!-- Main page scripts -->
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Smooth scroll for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const target = this.getAttribute('href');
+      if(target && target.length>1){
+        e.preventDefault();
+        const el = document.querySelector(target);
+        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+
+  // Volunteer form (client-side demo)
+  const volunteerForm = document.getElementById('volunteerForm');
+  if(volunteerForm){
+    volunteerForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('vname').value.trim();
+      const phone = document.getElementById('vphone').value.trim();
+      if(!name || !phone){ alert('Please provide name and phone'); return; }
+      alert('Thanks '+name+" — we will contact you soon. (Demo — no backend connected.)");
+      volunteerForm.reset();
+    });
+  }
+
+  // Contact form demo
+  const contactForm = document.getElementById('contactForm');
+  if(contactForm){
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thanks! Your message has been sent. (Demo — connect to a backend to process)');
+      contactForm.reset();
+    });
+  }
+
+  // Mobile nav toggle
+  const mobileNav = document.getElementById('mobileNav');
+  function toggleMobileNav(){
+    mobileNav.style.display = (mobileNav.style.display === 'block') ? 'none' : 'block';
+  }
+  function checkMobile(){
+    const mt = document.getElementById('mobileToggle');
+    if(window.innerWidth <= 900){ mt.style.display='inline-block'; }
+    else{ mt.style.display='none'; mobileNav.style.display='none'; }
+  }
+  window.addEventListener('resize', checkMobile);
+  checkMobile();
+  document.getElementById('mobileToggle').addEventListener('click', toggleMobileNav);
+
+  // Portal logic: use template -> iframe.srcdoc to avoid string-template interpolation issues
+  const openPortalBtn = document.getElementById('openPortalBtn');
+  const portalOverlay = document.getElementById('portalOverlay');
+  const portalClose = document.getElementById('portalClose');
+  const portalIframe = document.getElementById('portalIframe');
+  const dashTemplate = document.getElementById('dashTemplate');
+  const miniToast = document.getElementById('miniToast');
+  let portalLoaded = false;
+
+  function showMiniToast(msg, ms=1500){
+    miniToast.textContent = msg;
+    miniToast.style.display = 'block';
+    setTimeout(()=> miniToast.style.display = 'none', ms);
+  }
+
+  function openPortal(){
+    portalOverlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    // load iframe once (srcdoc)
+    if(!portalLoaded){
+      portalIframe.srcdoc = dashTemplate.innerHTML;
+      portalLoaded = true;
+    }
+  }
+
+  openPortalBtn.addEventListener('click', ()=>{
+    // If already logged in (stored on button), open dashboard; otherwise open login
+    if(openPortalBtn.dataset.user){
+      // already logged in — open portal so user can manage things
+      openPortal();
+    } else {
+      openPortal();
+    }
+  });
+
+  portalClose.addEventListener('click', ()=> {
+    portalOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+
+  portalOverlay.addEventListener('click', (e)=>{
+    if(e.target === portalOverlay){
+      portalOverlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Listen for messages from iframe (login success / logout / close)
+  window.addEventListener('message', (ev)=>{
+    const d = ev.data;
+    if(!d || !d.type) return;
+    if(d.type === 'login-success'){
+      // d.username, d.name available
+      openPortalBtn.textContent = 'Dashboard';
+      openPortalBtn.dataset.user = d.username || '';
+      showMiniToast('Logged in as ' + (d.name || d.username || 'user'));
+    }
+    if(d.type === 'close-portal'){
+      portalOverlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    if(d.type === 'logout'){
+      // remove logged-in state on parent
+      delete openPortalBtn.dataset.user;
+      openPortalBtn.textContent = 'Login';
+      showMiniToast('Logged out');
+    }
+  });
+
+  // quick debug helper — open console note
+  console.log('Index loaded. Click Login (top-right). Demo users: user1→1234 … user10→1243');
+
+
+  window.addEventListener("message", (event) => {
+    if (event.data.type === "close-portal") {
+      // Hide homepage sections
+      const header = document.querySelector("header");
+      const main = document.querySelector("main");
+      const footer = document.querySelector("footer");
+
+      if(header) header.style.display = "none";
+      if(main) main.style.display = "none";
+      if(footer) footer.style.display = "none";
+
+      // Show full-screen dashboard
+      document.getElementById("portalOverlay").style.display = "flex";
+      document.getElementById("portalBox").style.height = "100%";
+    }
+
+    // Optional: handle logout (Step 4 if you want it later)
+    if (event.data.type === "logout") {
+      // Show homepage back
+      const header = document.querySelector("header");
+      const main = document.querySelector("main");
+      const footer = document.querySelector("footer");
+
+      if(header) header.style.display = "block";
+      if(main) main.style.display = "block";
+      if(footer) footer.style.display = "block";
+
+      // Hide dashboard
+      document.getElementById("portalOverlay").style.display = "none";
+    }
+  });
+
+
+  // Listen for messages from dashboard iframe
+  window.addEventListener("message", (event) => {
+    if (event.data.type === "close-portal") {
+      // Make sure the overlay stays open and covers full screen
+      document.getElementById("portalOverlay").style.display = "flex";
+      document.getElementById("portalBox").style.height = "100%";
+    }
+  });
+
+
+</script>
+
+</body>
+</html>
