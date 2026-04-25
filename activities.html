@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Our Stories | Adhaar – The SoulServe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#7a7d3f;
+  --accent2:#9a8f5c;
+  --bg:#f6f5f0;
+  --bg-soft:#ece9e0;
+  --text:#2f2e26;
+  --muted:#5a594d;
+  --shadow:0 20px 50px rgba(60,55,35,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* HEADER */
+header{
+  position:fixed;top:0;width:100%;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  box-shadow:0 2px 20px rgba(0,0,0,.07);z-index:999;
+}
+.nav-container{
+  max-width:1150px;margin:auto;padding:0 24px;
+  height:82px;display:flex;justify-content:space-between;align-items:center;
+}
+.logo-box{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-img{width:52px;height:52px;object-fit:contain}
+.logo-text{font-size:22px;font-weight:900;color:var(--accent)}
+.nav a{
+  margin-left:22px;font-weight:600;color:var(--text);
+  text-decoration:none;font-size:14px;transition:.2s;
+}
+.nav a:hover,.nav a.active{color:var(--accent)}
+.btn-nav{
+  border:2px solid var(--accent);padding:8px 16px;
+  border-radius:8px;color:var(--accent)!important;
+}
+.btn-nav:hover{background:var(--accent);color:#fff!important}
+.menu-icon{display:none;font-size:28px;color:var(--accent);cursor:pointer}
+@media(max-width:850px){
+  .menu-icon{display:block}
+  .nav{display:none}
+  .nav.show{
+    display:flex;position:fixed;top:82px;right:0;
+    width:230px;height:100vh;flex-direction:column;
+    padding:24px;background:rgba(255,255,255,.97);
+    border-left:3px solid var(--accent);
+    box-shadow:-4px 0 20px rgba(0,0,0,.12);gap:4px;
+  }
+  .nav a{margin-left:0;padding:10px 0}
+}
+
+/* HERO */
+.stories-hero{
+  padding:140px 24px 80px;
+  text-align:center;
+  background:linear-gradient(180deg,#fff,var(--bg-soft));
+}
+.stories-hero .eyebrow{
+  font-size:12px;letter-spacing:3px;font-weight:700;
+  color:var(--accent);margin-bottom:16px;display:block;
+}
+.stories-hero h1{
+  font-size:clamp(2rem,5vw,3.2rem);font-weight:800;
+  color:var(--text);margin-bottom:16px;line-height:1.15;
+}
+.stories-hero p{
+  max-width:600px;margin:auto;color:var(--muted);
+  font-size:1.05rem;line-height:1.7;
+}
+
+/* STORIES GRID */
+.stories-section{
+  padding:80px 24px;
+  max-width:1150px;margin:auto;
+}
+.stories-section h2{
+  font-size:2rem;font-weight:800;margin-bottom:48px;
+  text-align:center;color:var(--text);
+}
+.stories-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:32px;
+}
+.story-card{
+  background:#fff;border-radius:24px;overflow:hidden;
+  box-shadow:var(--shadow);transition:.35s ease;
+}
+.story-card:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(60,55,35,.18)}
+.story-card-img{
+  width:100%;height:200px;object-fit:cover;
+  background:linear-gradient(135deg,var(--bg-soft),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:64px;
+}
+.story-card-body{padding:28px 26px}
+.story-card-tag{
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;margin-bottom:10px;display:block;
+}
+.story-card-body h3{
+  font-size:1.2rem;font-weight:800;color:var(--text);
+  margin-bottom:12px;line-height:1.3;
+}
+.story-card-body p{
+  font-size:.95rem;color:var(--muted);line-height:1.7;
+}
+
+/* IMPACT STRIP */
+.impact-strip{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  padding:60px 24px;text-align:center;color:#fff;
+  margin:0;
+}
+.impact-strip h2{font-size:2rem;font-weight:800;margin-bottom:12px}
+.impact-strip p{font-size:1rem;opacity:.9;max-width:500px;margin:0 auto 32px}
+.impact-strip a{
+  display:inline-block;padding:14px 36px;border-radius:50px;
+  background:#fff;color:var(--accent);font-weight:700;
+  text-decoration:none;transition:.3s;
+}
+.impact-strip a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.2)}
+
+/* FOOTER */
+.footer{
+  background:linear-gradient(180deg,#7a7d3f,#6b6e34);
+  color:#fff;padding:4.5rem 2rem 2rem;
+  border-top-left-radius:48px;border-top-right-radius:48px;
+}
+.footer-container{
+  max-width:1150px;margin:auto;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3.5rem;
+}
+.footer-about h3{font-size:1.4rem;font-weight:800;margin-bottom:1rem}
+.footer-about p{font-size:.9rem;line-height:1.8;color:rgba(255,255,255,.9)}
+.footer-links h4,.footer-contact h4{font-size:1rem;font-weight:700;margin-bottom:1rem}
+.footer-links{display:flex;flex-direction:column}
+.footer-links a{
+  text-decoration:none;font-size:.9rem;font-weight:600;
+  color:rgba(255,255,255,.9);margin-bottom:.5rem;transition:.3s;
+}
+.footer-links a:hover{opacity:.75}
+.footer-contact p{font-size:.9rem;margin-bottom:.5rem;color:rgba(255,255,255,.9)}
+.footer-bottom{
+  margin-top:3rem;padding-top:1.5rem;text-align:center;
+  font-size:.85rem;color:rgba(255,255,255,.8);
+  border-top:1px solid rgba(255,255,255,.25);
+}
+@media(max-width:900px){
+  .footer-container{grid-template-columns:1fr 1fr}
+  .footer-about{grid-column:1/-1;text-align:center}
+}
+@media(max-width:520px){
+  .footer-container{grid-template-columns:1fr;text-align:center}
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:.7s ease}
+.reveal.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <a href="index.html" class="logo-box">
+      <img src="logo.jpg" class="logo-img" alt="Logo">
+      <div class="logo-text">The SoulServes</div>
+    </a>
+    <nav class="nav" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="activities.html" class="active">Our Stories</a>
+      <a href="impact.html">Impact</a>
+      <a href="contact.html">Contact</a>
+      <a href="donate.html">Donate</a>
+      <a href="register.php" class="btn-nav">Sign Up</a>
+    </nav>
+    <div class="menu-icon" id="menuToggle">☰</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="stories-hero">
+  <span class="eyebrow">OUR STORIES</span>
+  <h1>Real People.<br>Real Impact.</h1>
+  <p>
+    Every donation has a story. Every meal served, every piece of clothing
+    given — these are moments of dignity restored.
+  </p>
+</section>
+
+<!-- STORIES GRID -->
+<section class="stories-section">
+  <h2>Stories from the Ground</h2>
+  <div class="stories-grid">
+
+    <div class="story-card reveal">
+      <div class="story-card-img">🍱</div>
+      <div class="story-card-body">
+        <span class="story-card-tag">Food Rescue</span>
+        <h3>A Meal That Restored Hope</h3>
+        <p>
+          A family of five hadn't eaten a proper meal in two days.
+          A single surplus donation from a local event changed that —
+          delivered within hours, with dignity intact.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card reveal">
+      <div class="story-card-img">👕</div>
+      <div class="story-card-body">
+        <span class="story-card-tag">Clothing Drive</span>
+        <h3>Warm Clothes Before Winter</h3>
+        <p>
+          Donated clothes reached children in a rural area just before
+          the cold season. Timing and care made all the difference.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card reveal">
+      <div class="story-card-img">🤝</div>
+      <div class="story-card-body">
+        <span class="story-card-tag">Volunteer Story</span>
+        <h3>Volunteers on the Ground</h3>
+        <p>
+          Our volunteers don't just deliver supplies — they build trust,
+          empathy, and lasting human connections in every community.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card reveal">
+      <div class="story-card-img">🌱</div>
+      <div class="story-card-body">
+        <span class="story-card-tag">Sustainability</span>
+        <h3>Zero Waste, Real Impact</h3>
+        <p>
+          What would have been thrown away became someone's lifeline.
+          Responsible redistribution is at the heart of everything we do.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card reveal">
+      <div class="story-card-img">🏘️</div>
+      <div class="story-card-body">
+        <span class="story-card-tag">Community</span>
+        <h3>Reaching the Unreached</h3>
+        <p>
+          We expanded to 3 new areas in 2026, connecting with communities
+          that had never received organized support before.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card reveal">
+      <div class="story-card-img">💚</div>
+      <div class="story-card-body">
+        <span class="story-card-tag">Dignity First</span>
+        <h3>Not Charity — Dignity</h3>
+        <p>
+          We believe in giving without labels. Every person who receives
+          support through Adhaar is treated with full respect and care.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <h2>Be Part of the Story</h2>
+  <p>Your donation, your time, your care — it all creates real change.</p>
+  <a href="donate.html">Donate Now →</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>Adhaar – The SoulServe</h3>
+      <p>Connecting surplus food and clothing to communities in need, reducing waste while restoring dignity and trust.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="impact.html">Impact</a>
+      <a href="donate.html">Donate</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>📞 +91 82379 17354</p>
+      <p>📧 adhaarsoulserve@gmail.com</p>
+      <p>📍 Maharashtra, India</p>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 Adhaar – The SoulServe. All Rights Reserved.</p>
+</footer>
+
+<script>
+// Mobile menu
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('show');
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

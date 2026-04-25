@@ -1,0 +1,170 @@
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+/* FULL PAGE */
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+/* CENTER WRAPPER */
+.auth-container{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* FORM BOX — supports both .box and .card */
+.box,
+.card{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    padding:35px 30px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* HEADING */
+h2{
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:14px;
+    color:#6b7280;
+    margin-bottom:20px;
+}
+
+/* INPUTS */
+.input-group{
+    margin-bottom:14px;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:14px;
+}
+
+input:focus, select:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+/* BUTTON */
+.primary-btn{
+    width:100%;
+    padding:12px;
+    background:#2563eb;
+    border:none;
+    color:white;
+    font-weight:600;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.primary-btn:hover{
+    background:#1d4ed8;
+}
+
+/* DIVIDER */
+.divider{
+    text-align:center;
+    margin:12px 0;   /* was too large */
+    position:relative;
+}
+
+.divider span{
+    background:#fff;
+    padding:0 10px;
+    font-size:13px;
+    color:#6b7280;
+}
+
+.divider::before{
+    content:"";
+    position:absolute;
+    height:1px;
+    width:100%;
+    background:#e5e7eb;
+    top:50%;
+    left:0;
+    z-index:-1;
+}
+
+/* GOOGLE BUTTON */
+.google-btn{
+    width:100%;
+    height:44px;              /* fixed height */
+    padding:0 12px;           /* remove large padding */
+    border-radius:8px;
+    border:1px solid #e5e7eb;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    font-size:14px;
+    font-weight:500;
+    color:#374151;
+    cursor:pointer;
+    transition:0.2s ease;
+}
+
+.google-btn img{
+    width:16px;               /* smaller logo */
+    height:16px;
+}
+
+.google-btn:hover{
+    background:#f9fafb;
+}
+
+
+/* ERROR MESSAGE */
+.error{
+    background:#fee2e2;
+    color:#b91c1c;
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:15px;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media (max-width:480px){
+
+    .box,
+    .card{
+        padding:25px 18px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+}
+
+/* SWITCH LINK */
+.switch{
+    text-align:center;
+    margin-top:16px;
+    font-size:13px;
+    color:#6b7280;
+}
+.switch a{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:600;
+}
+.switch a:hover{text-decoration:underline}
