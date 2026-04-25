@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us – Adhaar | The SoulServe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="contact.css">
+</head>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="nav-container">
+
+      <a href="index.html" class="logo-box">
+          <img src="logo.jpg" class="logo-img" alt="Logo">
+          <div class="logo-text">The SoulServes</div>
+      </a>
+
+      <nav class="nav" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="activities.html">Our Stories</a>
+        <a href="impact.html">Impact</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="donate.html">Donate</a>
+        <a href="register.php" class="btn-nav">Sign Up</a>
+      </nav>
+
+      <!-- MOBILE MENU ICON -->
+      <div class="menu-icon" id="menuToggle">☰</div>
+
+  </div>
+</header>
+
+
+<!-- ================= CONTACT HERO ================= -->
+<section class="contact-hero reveal">
+  <div class="contact-hero-content">
+    <span class="hero-eyebrow">GET IN TOUCH</span>
+    <h1>
+      Let’s Connect With Purpose
+    </h1>
+    <p>
+      Whether you want to donate, volunteer, collaborate,
+      or simply understand our work better —
+      we’re always open to meaningful conversations.
+    </p>
+  </div>
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section class="contact-section reveal">
+
+  <div class="contact-container">
+
+    <!-- LEFT : CONTACT INFO -->
+    <div class="contact-info">
+
+      <h2>Reach Us</h2>
+
+      <p class="contact-intro">
+        Adhaar believes communication should feel human,
+        not transactional. Reach out — we’ll respond with care.
+      </p>
+
+      <div class="info-item">
+        <span>📧</span>
+        <div>
+          <strong>Email</strong>
+          <p>adhaarsoulserve@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span>📞</span>
+        <div>
+          <strong>Phone</strong>
+          <p>+91 73878 30337</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span>📍</span>
+        <div>
+          <strong>Location</strong>
+          <p>Kopargaon, Maharashtra, India</p>
+        </div>
+      </div>
+
+      <div class="contact-note">
+        We typically respond within 24–48 hours.
+        For urgent matters, please call us directly.
+      </div>
+
+    </div>
+
+    <!-- RIGHT : CONTACT FORM -->
+    <div class="contact-form-box">
+
+      <h2>Send a Message</h2>
+
+      <script>
+        const cp = new URLSearchParams(location.search);
+        if(cp.get('sent')) document.write('<div style="background:#d1fae5;color:#065f46;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:20px;">✅ Message sent! We\'ll get back to you within 24–48 hours.</div>');
+        if(cp.get('error')) document.write('<div style="background:#fee2e2;color:#991b1b;padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:20px;">⚠️ Please fill all fields correctly.</div>');
+      </script>
+
+      <form id="contactForm" action="contact_submit.php" method="POST">
+
+        <div class="input-group">
+          <input type="text" name="name" placeholder=" " required>
+          <label>Your Name</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" name="email" placeholder=" " required>
+          <label>Your Email</label>
+        </div>
+
+        <div class="input-group">
+          <textarea name="message" placeholder=" " required></textarea>
+          <label>Your Message</label>
+        </div>
+
+        <button type="submit">
+          Send Message →
+        </button>
+
+      </form>
+
+      <p class="form-footnote">
+        By submitting this form, you agree to be contacted
+        by the Adhaar team regarding your message.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= SOCIAL STRIP ================= -->
+<section class="contact-social reveal">
+  <h3>Follow Our Journey</h3>
+  <div class="social-links">
+    <a href="#" aria-label="Instagram">Instagram</a>
+    <a href="#" aria-label="LinkedIn">LinkedIn</a>
+    <a href="#" aria-label="Twitter">Twitter</a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- ABOUT -->
+    <div class="footer-about">
+      <h3>Adhaar – The SoulServe</h3>
+      <p>
+        Connecting surplus food and clothing to communities in need,
+        reducing waste while restoring dignity and trust.
+      </p>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="impact.html">Impact</a>
+      <a href="donate.html">Donate</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>📞 +91 82379 17354</p>
+      <p>📧 adhaarsoulserve@gmail.com</p>
+      <p>📍 Maharashtra, India</p>
+    </div>
+
+  </div>
+
+  <p class="footer-bottom">
+    © 2026 Adhaar – The SoulServe. All Rights Reserved.
+  </p>
+</footer>
+<script src="contact.js"></script>
+<script>
+/* Auto-inject CSRF token into all POST forms on this page */
+fetch('get_csrf.php').then(r=>r.json()).then(d=>{
+  document.querySelectorAll('form[method="POST"],form[method="post"]').forEach(f=>{
+    if(!f.querySelector('[name="csrf_token"]')){
+      const i=document.createElement('input');
+      i.type='hidden';i.name='csrf_token';i.value=d.token;
+      f.prepend(i);
+    }
+  });
+});
+</script>
+</body>
+</html>
